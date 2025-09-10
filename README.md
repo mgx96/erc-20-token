@@ -1,3 +1,8 @@
+![Solidity](https://img.shields.io/badge/Solidity-0.8.x-blue)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Status](https://img.shields.io/badge/Status-Deployed-brightgreen)
+
+
 # ERC-20 Token Contract
 
 A simple implementation of an ERC-20 token written in Solidity. This project includes modular smart contracts for ownership control, pausing/unpausing functionality, minting, and burning tokens.

@@ -1,66 +1,47 @@
-## Foundry
+![Solidity](https://img.shields.io/badge/Solidity-0.8.x-blue)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Status](https://img.shields.io/badge/Status-Deployed-brightgreen)
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
 
-Foundry consists of:
+# ERC-20 Token Contract
 
-- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
-- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
-- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
-- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+A simple implementation of an ERC-20 token written in Solidity. This project includes modular smart contracts for ownership control, pausing/unpausing functionality, minting, and burning tokens.
 
-## Documentation
+## Features
 
-https://book.getfoundry.sh/
+- ERC-20 compliant functionality
+- Ownership control (`Ownable`)
+- Pausable contract logic (`Pausable`)
+- Token minting and burning
+- Safe access control with modifiers
+- Written in Solidity 0.8.x
 
-## Usage
+## Contracts
 
-### Build
+- `Ownable.sol`: Manages contract ownership
+- `Pausable.sol`: Allows pausing/unpausing of token operations
+- `Token.sol`: The main ERC-20 contract
 
-```shell
-$ forge build
-```
+## How to Use
 
-### Test
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/mgx96/erc-20-token.git
+   cd erc-20-token
 
-```shell
-$ forge test
-```
 
-### Format
+## Getting Started
 
-```shell
-$ forge fmt
-```
+Use [Remix](https://remix.ethereum.org/) or a local development environment like Hardhat or Foundry to compile and deploy the contracts.
 
-### Gas Snapshots
 
-```shell
-$ forge snapshot
-```
+## Deployment
 
-### Anvil
+**Network**: Ethereum Sepolia Testnet  
+**Contract Address**: [`0x496bd901B96299f39798dBe9D1bbDbB643F6dDB3`](https://sepolia.etherscan.io/address/0x496bd901b96299f39798dbe9d1bbdbb643f6ddb3)  
+**Verified on Etherscan**: ✅
 
-```shell
-$ anvil
-```
 
-### Deploy
+## License
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+MIT

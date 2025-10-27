@@ -9,43 +9,43 @@ contract MyToken is Ownable, Pausable {
     uint8 public constant DECIMALS = 18;
     uint256 public totalSupply;
 
-    mapping(address => uint256) public balanceOf;
-    mapping(address => mapping(address => uint256)) private _allowances;
+    mapping(address => uint256) private s_balanceOf;
+    mapping(address => mapping(address => uint256)) private s_allowances;
 
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Approval(address indexed owner, address indexed spender, uint256 value);
 
     constructor() {
         totalSupply = 1000_000 * (10 ** uint256(DECIMALS));
-        balanceOf[msg.sender] = totalSupply;
+        s_balanceOf[msg.sender] = totalSupply;
         emit Transfer(address(0), msg.sender, totalSupply);
     }
 
     function transfer(address _to, uint256 _value) public whenNotPaused returns (bool success) {
-        require(balanceOf[msg.sender] >= _value, "Insufficient balance");
-        balanceOf[msg.sender] -= _value;
-        balanceOf[_to] += _value;
+        require(s_balanceOf[msg.sender] >= _value, "Insufficient balance");
+        s_balanceOf[msg.sender] -= _value;
+        s_balanceOf[_to] += _value;
         emit Transfer(msg.sender, _to, _value);
         return true;
     }
 
     function approve(address _spender, uint256 _value) public whenNotPaused returns (bool success) {
-        _allowances[msg.sender][_spender] = _value;
+        s_allowances[msg.sender][_spender] = _value;
         emit Approval(msg.sender, _spender, _value);
         return true;
     }
 
     function allowance(address _owner, address _spender) public view returns (uint256) {
-        return _allowances[_owner][_spender];
+        return s_allowances[_owner][_spender];
     }
 
     function transferFrom(address _from, address _to, uint256 _value) public whenNotPaused returns (bool success) {
-        require(balanceOf[_from] >= _value, "Insufficient balance");
-        require(_allowances[_from][msg.sender] >= _value, "Allowance exceeded");
+        require(s_balanceOf[_from] >= _value, "Insufficient balance");
+        require(s_allowances[_from][msg.sender] >= _value, "Allowance exceeded");
 
-        balanceOf[_from] -= _value;
-        balanceOf[_to] += _value;
-        _allowances[_from][msg.sender] -= _value;
+        s_balanceOf[_from] -= _value;
+        s_balanceOf[_to] += _value;
+        s_allowances[_from][msg.sender] -= _value;
 
         emit Transfer(_from, _to, _value);
         return true;
@@ -54,13 +54,13 @@ contract MyToken is Ownable, Pausable {
     function mint(address to, uint256 amount) public onlyOwner {
         require(to != address(0), "Invalid address");
         totalSupply += amount;
-        balanceOf[to] += amount;
+        s_balanceOf[to] += amount;
         emit Transfer(address(0), to, amount);
     }
 
     function burn(uint256 amount) public onlyOwner {
-        require(balanceOf[msg.sender] >= amount, "The specified burn amount exceeds your balance");
-        balanceOf[msg.sender] -= amount;
+        require(s_balanceOf[msg.sender] >= amount, "The specified burn amount exceeds your balance");
+        s_balanceOf[msg.sender] -= amount;
         totalSupply -= amount;
         emit Transfer(msg.sender, address(0), amount);
     }

@@ -51,14 +51,14 @@ contract MyToken is Ownable, Pausable {
         return true;
     }
 
-    function mint(address to, uint amount) public onlyOwner{
+    function mint(address to, uint256 amount) public onlyOwner {
         require(to != address(0), "Invalid address");
         totalSupply += amount;
         balanceOf[to] += amount;
         emit Transfer(address(0), to, amount);
     }
 
-    function burn(uint amount) public onlyOwner{
+    function burn(uint256 amount) public onlyOwner {
         require(balanceOf[msg.sender] >= amount, "The specified burn amount exceeds your balance");
         balanceOf[msg.sender] -= amount;
         totalSupply -= amount;

@@ -3,27 +3,26 @@ pragma solidity ^0.8.0;
 
 import {Ownable} from "./Ownable.sol";
 
-contract Pausable is Ownable{
-
+contract Pausable is Ownable {
     bool private _paused;
 
     event Paused(address account);
     event Unpaused(address account);
 
-    constructor(){
+    constructor() {
         _paused = false;
     }
 
-    function paused() public view returns(bool){
+    function paused() public view returns (bool) {
         return _paused;
     }
 
-    modifier whenPaused(){
+    modifier whenPaused() {
         require(_paused, "Contract is not paused");
         _;
     }
 
-    modifier whenNotPaused(){
+    modifier whenNotPaused() {
         require(!_paused, "Contract is paused");
         _;
     }

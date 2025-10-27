@@ -4,9 +4,9 @@ import {Ownable} from "./Ownable.sol";
 import {Pausable} from "./Pausable.sol";
 
 contract MyToken is Ownable, Pausable {
-    string public name = "My Token";
-    string public symbol = "MTK";
-    uint8 public constant DECIMALS = 18;
+    string public name;
+    string public symbol;
+    uint8 public decimals = 18;
     uint256 public totalSupply;
 
     mapping(address => uint256) private s_balanceOf;
@@ -15,13 +15,16 @@ contract MyToken is Ownable, Pausable {
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Approval(address indexed owner, address indexed spender, uint256 value);
 
-    constructor() {
-        totalSupply = 1000_000 * (10 ** uint256(DECIMALS));
+    constructor(uint256 initialSupply, string memory tokenName, string memory tokenSymbol) {
+        totalSupply = initialSupply * (10 ** uint256(decimals));
         s_balanceOf[msg.sender] = totalSupply;
         emit Transfer(address(0), msg.sender, totalSupply);
+        name = tokenName;
+        symbol = tokenSymbol;
     }
 
     function transfer(address _to, uint256 _value) public whenNotPaused returns (bool success) {
+        require(_to != address(0), "Invalid address");
         require(s_balanceOf[msg.sender] >= _value, "Insufficient balance");
         s_balanceOf[msg.sender] -= _value;
         s_balanceOf[_to] += _value;

@@ -1,42 +1,66 @@
-# ERC-20 Token Contract
+## Foundry
 
-A simple implementation of an ERC-20 token written in Solidity. This project includes modular smart contracts for ownership control, pausing/unpausing functionality, minting, and burning tokens.
+**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
 
-## Features
+Foundry consists of:
 
-- ERC-20 compliant functionality
-- Ownership control (`Ownable`)
-- Pausable contract logic (`Pausable`)
-- Token minting and burning
-- Safe access control with modifiers
-- Written in Solidity 0.8.x
+- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
+- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
+- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
+- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
 
-## Contracts
+## Documentation
 
-- `Ownable.sol`: Manages contract ownership
-- `Pausable.sol`: Allows pausing/unpausing of token operations
-- `Token.sol`: The main ERC-20 contract
+https://book.getfoundry.sh/
 
-## How to Use
+## Usage
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/mgx96/erc-20-token.git
-   cd erc-20-token
+### Build
 
+```shell
+$ forge build
+```
 
-## Getting Started
+### Test
 
-Use [Remix](https://remix.ethereum.org/) or a local development environment like Hardhat or Foundry to compile and deploy the contracts.
+```shell
+$ forge test
+```
 
+### Format
 
-## Deployment
+```shell
+$ forge fmt
+```
 
-**Network**: Ethereum Sepolia Testnet  
-**Contract Address**: [`0x496bd901B96299f39798dBe9D1bbDbB643F6dDB3`](https://sepolia.etherscan.io/address/0x496bd901b96299f39798dbe9d1bbdbb643f6ddb3)  
-**Verified on Etherscan**: ✅
+### Gas Snapshots
 
+```shell
+$ forge snapshot
+```
 
-## License
+### Anvil
 
-MIT
+```shell
+$ anvil
+```
+
+### Deploy
+
+```shell
+$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+```
+
+### Cast
+
+```shell
+$ cast <subcommand>
+```
+
+### Help
+
+```shell
+$ forge --help
+$ anvil --help
+$ cast --help
+```

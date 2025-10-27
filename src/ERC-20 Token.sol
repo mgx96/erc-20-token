@@ -6,7 +6,7 @@ import {Pausable} from "./Pausable.sol";
 contract MyToken is Ownable, Pausable {
     string public name = "My Token";
     string public symbol = "MTK";
-    uint8 public decimals = 18;
+    uint8 public constant DECIMALS = 18;
     uint256 public totalSupply;
 
     mapping(address => uint256) public balanceOf;
@@ -16,7 +16,7 @@ contract MyToken is Ownable, Pausable {
     event Approval(address indexed owner, address indexed spender, uint256 value);
 
     constructor() {
-        totalSupply = 1000 * (10 ** uint256(decimals));
+        totalSupply = 1000_000 * (10 ** uint256(DECIMALS));
         balanceOf[msg.sender] = totalSupply;
         emit Transfer(address(0), msg.sender, totalSupply);
     }

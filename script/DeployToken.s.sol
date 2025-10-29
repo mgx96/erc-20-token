@@ -5,7 +5,7 @@ import {Script} from "lib/forge-std/src/Script.sol";
 import {MyToken} from "../src/ERC-20 Token.sol";
 
 contract DeployToken is Script {
-    uint256 public constant INITIAL_SUPPLY = 1000_000;
+    uint256 public constant INITIAL_SUPPLY = 1000_000 ether;
 
     function run() external {
         vm.startBroadcast();

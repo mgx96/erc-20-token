@@ -1,47 +1,92 @@
-![Solidity](https://img.shields.io/badge/Solidity-0.8.x-blue)
+![Solidity](https://img.shields.io/badge/Solidity-0.8.30-blue)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-![Status](https://img.shields.io/badge/Status-Deployed-brightgreen)
+![Framework](https://img.shields.io/badge/Framework-Foundry-orange)
+![Coverage](https://img.shields.io/badge/Test%20Coverage-100%25-brightgreen)
+![Status](https://img.shields.io/badge/Status-Local%20Development-lightgrey)
 
+# ERC-20 Token (MyToken)
 
-# ERC-20 Token Contract
+A modern, gas-optimized ERC-20 implementation written in Solidity and built using the Foundry toolchain.  
+The contract suite features ownership control, pausability, custom errors, event-driven architecture, and full test coverage.
 
-A simple implementation of an ERC-20 token written in Solidity. This project includes modular smart contracts for ownership control, pausing/unpausing functionality, minting, and burning tokens.
+---
 
 ## Features
 
-- ERC-20 compliant functionality
-- Ownership control (`Ownable`)
-- Pausable contract logic (`Pausable`)
-- Token minting and burning
-- Safe access control with modifiers
-- Written in Solidity 0.8.x
+- **ERC-20 compliant** with full test suite  
+- **Gas efficient design** using custom errors and minimal storage reads  
+- **Ownership control** (`Ownable`)  
+- **Pause / Unpause functionality** (`Pausable`)  
+- **Minting & Burning** restricted to the owner  
+- **100% line and branch coverage** (24 passing tests)  
+
+---
 
 ## Contracts
 
-- `Ownable.sol`: Manages contract ownership
-- `Pausable.sol`: Allows pausing/unpausing of token operations
-- `Token.sol`: The main ERC-20 contract
+| Contract | Description |
+|-----------|--------------|
+| `Ownable.sol` | Ownership logic with secure transfer and renounce features |
+| `Pausable.sol` | Contract-level pause control using modifiers and events |
+| `ERC-20 Token.sol` | Core ERC-20 implementation with mint/burn support |
+| `DeployToken.s.sol` | Foundry deployment script for local or live networks |
 
-## How to Use
+---
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/mgx96/erc-20-token.git
-   cd erc-20-token
+## Project Structure
 
+```
+src/
+ ├── ERC-20 Token.sol
+ ├── Ownable.sol
+ └── Pausable.sol
+script/
+ └── DeployToken.s.sol
+test/
+ └── TokenTest.t.sol
+```
+
+---
 
 ## Getting Started
 
-Use [Remix](https://remix.ethereum.org/) or a local development environment like Hardhat or Foundry to compile and deploy the contracts.
+### Prerequisites
+- [Foundry](https://book.getfoundry.sh/getting-started/installation) installed  
+- Local or testnet RPC endpoint (e.g., Anvil, Sepolia)
 
+### Installation
+```bash
+git clone https://github.com/mgx96/erc-20-token.git
+cd erc-20-token
+forge install
+```
+
+### Running Tests
+```bash
+forge test -vvv
+```
+
+### Running Coverage
+```bash
+forge coverage --report summary
+```
+
+---
 
 ## Deployment
 
-**Network**: Ethereum Sepolia Testnet  
-**Contract Address**: [`0x496bd901B96299f39798dBe9D1bbDbB643F6dDB3`](https://sepolia.etherscan.io/address/0x496bd901b96299f39798dbe9d1bbdbb643f6ddb3)  
-**Verified on Etherscan**: ✅
+A Foundry deployment script is included:
 
+```bash
+forge script script/DeployToken.s.sol --broadcast --rpc-url <YOUR_RPC_URL>
+```
+
+> ℹ️ The current version is optimized for local development and testing.  
+> It has not yet been deployed on any live network.
+
+---
 
 ## License
 
-MIT
+[MIT](LICENSE)
+

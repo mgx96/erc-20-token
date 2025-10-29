@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract Ownable {
     error Ownable__NotOwner();
     error Ownable__InvalidOwnershipAssignment();
-    
+
     address private s_owner;
 
     event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
@@ -18,14 +18,14 @@ contract Ownable {
     }
 
     modifier onlyOwner() {
-        if(s_owner != msg.sender) {
+        if (s_owner != msg.sender) {
             revert Ownable__NotOwner();
         }
         _;
     }
 
     function transferOwnership(address newOwner) public onlyOwner {
-        if(newOwner == address(0)) {
+        if (newOwner == address(0)) {
             revert Ownable__InvalidOwnershipAssignment();
         }
         emit OwnershipTransferred(s_owner, newOwner);

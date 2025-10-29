@@ -3,8 +3,6 @@ pragma solidity ^0.8.0;
 import {Ownable} from "./Ownable.sol";
 import {Pausable} from "./Pausable.sol";
 
-
-
 contract MyToken is Ownable, Pausable {
     error MyToken__InsufficientBalance();
     error MyToken__InvalidAddress();
@@ -31,10 +29,10 @@ contract MyToken is Ownable, Pausable {
     }
 
     function transfer(address _to, uint256 _value) public whenNotPaused returns (bool success) {
-        if(_to == address(0)) {
+        if (_to == address(0)) {
             revert MyToken__InvalidAddress();
         }
-        if(s_balanceOf[msg.sender] < _value) {
+        if (s_balanceOf[msg.sender] < _value) {
             revert MyToken__InsufficientBalance();
         }
         s_balanceOf[msg.sender] -= _value;
@@ -54,10 +52,10 @@ contract MyToken is Ownable, Pausable {
     }
 
     function transferFrom(address _from, address _to, uint256 _value) public whenNotPaused returns (bool success) {
-        if(s_balanceOf[_from] < _value) {
+        if (s_balanceOf[_from] < _value) {
             revert MyToken__InsufficientBalance();
         }
-        if(s_allowances[_from][msg.sender] < _value) {
+        if (s_allowances[_from][msg.sender] < _value) {
             revert MyToken__AllowanceExceeded();
         }
 
@@ -70,7 +68,7 @@ contract MyToken is Ownable, Pausable {
     }
 
     function mint(address _to, uint256 amount) public onlyOwner {
-        if(_to == address(0)) {
+        if (_to == address(0)) {
             revert MyToken__InvalidAddress();
         }
         totalSupply += amount;
@@ -79,7 +77,7 @@ contract MyToken is Ownable, Pausable {
     }
 
     function burn(uint256 amount) public onlyOwner {
-        if(s_balanceOf[msg.sender] < amount) {
+        if (s_balanceOf[msg.sender] < amount) {
             revert MyToken__BurnAmountExceedsBalance();
         }
         s_balanceOf[msg.sender] -= amount;

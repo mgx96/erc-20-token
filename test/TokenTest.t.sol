@@ -1,7 +1,6 @@
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-
 import {MyToken} from "../src/ERC-20 Token.sol";
 import {Test} from "lib/forge-std/src/Test.sol";
 import {DeployToken} from "../script/DeployToken.s.sol";
@@ -9,7 +8,6 @@ import {Ownable} from "../src/Ownable.sol";
 import {Pausable} from "../src/Pausable.sol";
 
 contract TokenTest is Test {
-
     uint256 public constant INITIAL_SUPPLY = 1000_000;
     uint256 private constant OLAF_STARTING_BALANCE = 100 ether;
 
@@ -58,7 +56,7 @@ contract TokenTest is Test {
         uint256 transferAmount = 50 ether;
         uint256 olafStartingBalance = token.balanceOf(olaf);
         uint256 fioraStartingBalance = token.balanceOf(fiora);
-        
+
         vm.prank(olaf);
         token.transfer(fiora, transferAmount);
         assertEq(token.balanceOf(olaf), olafStartingBalance - transferAmount);
@@ -235,5 +233,4 @@ contract TokenTest is Test {
         token.renounceOwnership();
         assertEq(token.owner(), address(0));
     }
-
 }

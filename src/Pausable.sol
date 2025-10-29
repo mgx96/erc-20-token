@@ -6,7 +6,7 @@ import {Ownable} from "./Ownable.sol";
 contract Pausable is Ownable {
     error Pausable__ContractPaused();
     error Pausable__ContractNotPaused();
-    
+
     bool private s_paused;
 
     event Paused(address account);
@@ -21,14 +21,14 @@ contract Pausable is Ownable {
     }
 
     modifier whenPaused() {
-        if(!s_paused) {
+        if (!s_paused) {
             revert Pausable__ContractNotPaused();
         }
         _;
     }
 
     modifier whenNotPaused() {
-        if(s_paused) {
+        if (s_paused) {
             revert Pausable__ContractPaused();
         }
         _;
